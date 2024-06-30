@@ -10,7 +10,7 @@ const Navber = () => {
               width={100} height={20} alt="logo" className="rounded-xl ml-2"
               priority
             />
-            <div className="space-x-14 flex items-center text-gray-700">
+            <div className="lg:space-x-14 space-x-5 flex items-center text-gray-700">
                 <div>Group</div>
                 <div>Code</div>
                 <div>Specialized Tests</div>
