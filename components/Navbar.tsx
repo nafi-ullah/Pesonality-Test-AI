@@ -5,7 +5,7 @@ import { IoMenu } from "react-icons/io5";
 
 const Navber = () => {
   return (
-    <div className="flex justify-between py-4 px-8 bg-[#1C1F26] rounded-xl shadow-xl mt-4 mx-4 sm:mx-6 md:mx-8 lg:mx-12">
+    <div className="flex justify-between py-2 px-8 bg-[#1C1F26] rounded-xl shadow-xl mt-4 mx-4 sm:mx-6 md:mx-8 lg:mx-12">
       <button className="md:hidden text-slate-200">
         <IoMenu size={42} />
       </button>
