@@ -1,13 +1,14 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import React, { useState } from "react";
+import { useQuestionsContext } from '../context/QuestionsContext';
 interface Question {
   isImage: boolean;
   options: string[];
   question: string;
 }
 
-const questions: Question[] = [
+const myquestions: Question[] = [
   {
     isImage: false,
     options: [
@@ -91,6 +92,7 @@ const questions: Question[] = [
 ];
 
 const Questions: React.FC = () => {
+    const { questions } = useQuestionsContext();
   const [selectedOptions, setSelectedOptions] = useState<{ [key: number]: string }>({});
 
   const handleOptionClick = (questionIndex: number, option: string) => {

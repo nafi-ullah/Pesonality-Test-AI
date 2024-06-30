@@ -16,13 +16,16 @@ const GroupPage: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     try {
+        console.log(jobTitle);
+        console.log(numberOfQuestions);
       const response = await axios.post('http://localhost:5000/generate_personality_question', {
         jobTitle,
         numberOfQuestions,
       });
+        console.log(response.data)
+      setQuestions(response.data);
+      router.push('/Questions');
 
-      setQuestions(response.data.questions);
-      router.push('/ShowQuestion');
     } catch (error) {
       console.error('Error fetching questions:', error);
       setLoading(false);
@@ -35,8 +38,11 @@ const GroupPage: React.FC = () => {
         <div className='flex justify-center '>
         <div className='mt-10 w-96  '>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="loader border-t-4 border-b-4 border-indigo-500 w-12 h-12 rounded-full animate-spin"></div>
+        <div className="flex flex-col justify-center items-center h-screen">
+          <div className="loader border-t-4 border-b-4 border-indigo-500 w-12 h-12 rounded-full animate-spin">
+
+            <div>Questions Generating With AI </div>
+          </div>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
