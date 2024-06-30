@@ -38,3 +38,22 @@
   100% { transform: rotate(360deg); }
 }
 
+.ai-button {
+  background-image: linear-gradient(to right, #3c1053 0%, #3c105340 50%, #3c1053 100%);
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position .5s ease;
+}
+.ai-button:hover {
+  background-position: 0%;
+}
+
+/* Add this to your styles.css */
+.gradient-shift {
+  @apply bg-gradient-to-l from-[#3c1053] to-transparent;
+  background-size: 200% 100%;
+  transition: background-position 0.5s ease;
+}
+.gradient-shift:hover {
+  background-position: 50% 0;
+}

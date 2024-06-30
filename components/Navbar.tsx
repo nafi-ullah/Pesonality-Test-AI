@@ -1,29 +1,27 @@
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { NavRight } from "./NavRight";
 
 const Navber = () => {
-    return (
-        <div className="flex justify-between  py-5 bg-white rounded-xl shadow-lg mt-4 mx-8">
-         
-            <Image
-              src="/logo.png"
-              width={100} height={20} alt="logo" className="rounded-xl ml-2"
-              priority
-            />
-            <div className="lg:space-x-14 space-x-5 flex items-center text-gray-700">
-                <div>Group</div>
-                <div>Code</div>
-                <div>Specialized Tests</div>
-                <div>Teams</div>
-                <div>Resources</div>
-            </div>
-            <div className="flex items-center">
-            <LanguageSwitcher />
-            <div className="rounded-full bg-slate-500 w-10 h-10"></div>
-            </div>
-           
-       </div>
-    );
+  return (
+    <div className="flex justify-between py-4 px-8 bg-[#1C1F26] rounded-xl shadow-xl mt-4 mx-12">
+      <Image
+        src="/light_logo.png"
+        width={170}
+        height={20}
+        alt="logo"
+        className="rounded-xl ml-2"
+        priority
+      />
+      <div className="flex items-center gap-2">
+        <button className="text-white ai-button px-4 py-2 rounded-xl shadow-xl border-[2px] border-slate-500">
+          Enter Code
+        </button>
+        <LanguageSwitcher />
+        <NavRight />
+      </div>
+    </div>
+  );
 };
 
 export default Navber;
