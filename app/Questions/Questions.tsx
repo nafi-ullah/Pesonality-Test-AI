@@ -2,11 +2,10 @@
 import Navbar from "@/components/Navbar";
 import React, { useState } from "react";
 interface Question {
-    isImage: boolean;
-    options: string[];
-    question: string;
-  }
-  
+  isImage: boolean;
+  options: string[];
+  question: string;
+}
 
 const questions: Question[] = [
   {
@@ -92,61 +91,55 @@ const questions: Question[] = [
 ];
 
 const Questions: React.FC = () => {
-  const [selectedOptions, setSelectedOptions] = useState<{ [key: number]: number }>({});
+  const [selectedOptions, setSelectedOptions] = useState<{ [key: number]: string }>({});
 
-  const handleOptionClick = (questionIndex: number, optionIndex: number) => {
+  const handleOptionClick = (questionIndex: number, option: string) => {
     setSelectedOptions((prevSelectedOptions) => ({
       ...prevSelectedOptions,
-      [questionIndex]: optionIndex,
+      [questionIndex]: option,
     }));
   };
 
+  const handleSubmit = () => {
+    const submissionData = questions.map((question, questionIndex) => ({
+      ...question,
+      answer: selectedOptions[questionIndex] || ""
+    }));
+    console.log(submissionData);
+    
+  }
+
   return (
-   
-     
-     
-      
-        <div id="text div" className="w-full flex flex-col items-center justify-center mt-10">
-       
-          {questions.map((question, questionIndex) => (
-            <div key={questionIndex} className="mb-10 w-full max-w-2xl px-5">
-              <div className="text-xl font-bold text-black mb-3 text-center">
-                {question.question}
+    <div id="text div" className="w-full flex flex-col items-center justify-center mt-10">
+      {questions.map((question, questionIndex) => (
+        <div key={questionIndex} className="mb-10 w-full max-w-2xl px-5">
+          <div className="text-xl font-bold text-black mb-3 text-center">
+            {question.question}
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {question.options.map((option, optionIndex) => (
+              <div
+                key={optionIndex}
+                className={`p-3 rounded-lg cursor-pointer border-2 border-gray-200 ${selectedOptions[questionIndex] === option ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
+                onClick={() => handleOptionClick(questionIndex, option)}
+              >
+                {option}
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                {question.isImage
-                  ? (
-                   
-                    question.options.map((option, optionIndex) => (
-                        <div
-                          key={optionIndex}
-                          className={`p-3 rounded-lg cursor-pointer border-2 border-gray-200 ${selectedOptions[questionIndex] === optionIndex ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
-                          onClick={() => handleOptionClick(questionIndex, optionIndex)}
-                        >
-                          {option}
-                        </div>
-                      ))
-                    
-                  ) : (
-                    question.options.map((option, optionIndex) => (
-                      <div
-                        key={optionIndex}
-                        className={`p-3 rounded-lg cursor-pointer border-2 shadow-lg border-gray-200 text-center flex items-center justify-center ${selectedOptions[questionIndex] === optionIndex ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
-                        onClick={() => handleOptionClick(questionIndex, optionIndex)}
-                      >
-                        {option}
-                      </div>
-                    ))
-                  )}
-              </div>
-              <div className="h-10"> </div>
-              <hr />
-            </div>
-          ))}
-          <div className="w-full  flex justify-center ">
-            <button className="text-white bg-gray-700 rounded-lg w-1/3 h-10 flex items-center justify-center">Submit</button></div>
+            ))}
+          </div>
+          <div className="h-10"> </div>
+          <hr />
         </div>
-     
+      ))}
+      <div className="w-full flex justify-center ">
+        <button 
+          onClick={handleSubmit}
+          className="text-white bg-gray-700 rounded-lg w-1/3 h-10 flex items-center justify-center"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
   );
 };
 
