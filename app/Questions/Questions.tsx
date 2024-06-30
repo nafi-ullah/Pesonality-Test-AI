@@ -92,8 +92,10 @@ const myquestions: Question[] = [
 ];
 
 const Questions: React.FC = () => {
-    const { questions } = useQuestionsContext();
+    const { questions, jobTitle } = useQuestionsContext();
   const [selectedOptions, setSelectedOptions] = useState<{ [key: number]: string }>({});
+  const [loading, setLoading]= useState<boolean>(false);
+  const [response, setResponse] = useState<{ description: string, title: string } | null>(null);
 
   const handleOptionClick = (questionIndex: number, option: string) => {
     setSelectedOptions((prevSelectedOptions) => ({
@@ -102,12 +104,31 @@ const Questions: React.FC = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    const submissionData = questions.map((question, questionIndex) => ({
-      ...question,
-      answer: selectedOptions[questionIndex] || ""
-    }));
+  const handleSubmit = async () => {
+    setLoading(true);
+    const submissionData = {
+        jobTitle,
+        questions: questions.map((question, questionIndex) => ({
+          ...question,
+          answer: selectedOptions[questionIndex] || ""
+        }))
+      };
     console.log(submissionData);
+    try {
+        const res = await fetch("http://localhost:5000/get_personality", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(submissionData),
+        });
+  
+        const data = await res.json();
+        setResponse(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching personality data:", error);
+      }
     
   }
 
@@ -133,13 +154,20 @@ const Questions: React.FC = () => {
           <hr />
         </div>
       ))}
-      <div className="w-full flex justify-center ">
+      <div className="w-full flex flex-col items-center justify-center ">
         <button 
           onClick={handleSubmit}
           className="text-white bg-gray-700 rounded-lg w-1/3 h-10 flex items-center justify-center"
         >
-          Submit
+          {!loading ? 'Submit' :  <div className="loader border-t-4 border-b-4 border-indigo-500 w-3 h-3 rounded-full animate-spin">            
+</div>}
         </button>
+        {response && (
+        <div className="mt-10 w-full max-w-2xl px-5 text-center">
+          <h2 className="text-2xl font-bold">{response.title}</h2>
+          <p className="text-lg mt-4">{response.description}</p>
+        </div>
+      )}
       </div>
     </div>
   );

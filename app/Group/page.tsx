@@ -6,10 +6,10 @@ import axios from 'axios';
 import Navber from '@/components/Navbar';
 
 const GroupPage: React.FC = () => {
-  const [jobTitle, setJobTitle] = useState('');
+  const [jobTitle, setJobTitleForm] = useState('');
   const [numberOfQuestions, setNumberOfQuestions] = useState('');
   const [loading, setLoading] = useState(false);
-  const { setQuestions } = useQuestionsContext();
+  const { setQuestions, setJobTitle } = useQuestionsContext();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -24,6 +24,7 @@ const GroupPage: React.FC = () => {
       });
         console.log(response.data)
       setQuestions(response.data);
+      setJobTitle(jobTitle);
       router.push('/Questions');
 
     } catch (error) {
@@ -41,8 +42,9 @@ const GroupPage: React.FC = () => {
         <div className="flex flex-col justify-center items-center h-screen">
           <div className="loader border-t-4 border-b-4 border-indigo-500 w-12 h-12 rounded-full animate-spin">
 
-            <div>Questions Generating With AI </div>
+            
           </div>
+          <div>Questions Generating With AI </div>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -52,7 +54,7 @@ const GroupPage: React.FC = () => {
               type="text"
               id="jobTitle"
               value={jobTitle}
-              onChange={(e) => setJobTitle(e.target.value)}
+              onChange={(e) => setJobTitleForm(e.target.value)}
               className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
