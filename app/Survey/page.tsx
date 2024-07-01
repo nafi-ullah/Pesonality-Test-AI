@@ -2,6 +2,8 @@
 import Navber from '@/components/Navbar';
 import { useState } from 'react';
 import { useQuestionsContext } from '../context/QuestionsContext';
+import { SiTestcafe } from "react-icons/si";
+
 
 interface Question {
   isImage: boolean;
@@ -16,9 +18,9 @@ const myquestions: Question[] = [
       "Address the issue immediately and find a fair solution.",
       "Take time to understand both sides before making a decision.",
       "Avoid the conflict and hope it resolves itself.",
-      "Delegate the issue to someone else."
+      "Delegate the issue to someone else.",
     ],
-    question: "How do you handle conflicts within the team?"
+    question: "How do you handle conflicts within the team?",
   },
   {
     isImage: false,
@@ -26,9 +28,9 @@ const myquestions: Question[] = [
       "Create a detailed schedule and stick to it strictly.",
       "Tackle the most urgent tasks first and adjust as needed.",
       "Focus on the tasks that you enjoy the most.",
-      "Delegate tasks to other team members to manage workload."
+      "Delegate tasks to other team members to manage workload.",
     ],
-    question: "How do you prioritize tasks when you have multiple deadlines?"
+    question: "How do you prioritize tasks when you have multiple deadlines?",
   },
   {
     isImage: false,
@@ -36,9 +38,9 @@ const myquestions: Question[] = [
       "Offer regular praise and recognition.",
       "Set clear goals and rewards.",
       "Lead by example and stay positive.",
-      "Provide constructive feedback regularly."
+      "Provide constructive feedback regularly.",
     ],
-    question: "How do you motivate others in the organization?"
+    question: "How do you motivate others in the organization?",
   },
   {
     isImage: false,
@@ -46,9 +48,10 @@ const myquestions: Question[] = [
       "Have a private conversation to understand the issue.",
       "Provide additional resources and support.",
       "Give them some time to improve on their own.",
-      "Escalate the issue to higher management."
+      "Escalate the issue to higher management.",
     ],
-    question: "How do you handle a situation when a team member is underperforming?"
+    question:
+      "How do you handle a situation when a team member is underperforming?",
   },
   {
     isImage: false,
@@ -56,9 +59,9 @@ const myquestions: Question[] = [
       "Gather all information and analyze before deciding.",
       "Trust my intuition and experience.",
       "Consult with team members and stakeholders.",
-      "Delegate the decision to a more experienced person."
+      "Delegate the decision to a more experienced person.",
     ],
-    question: "What's your approach to decision-making?"
+    question: "What's your approach to decision-making?",
   },
   {
     isImage: false,
@@ -66,9 +69,9 @@ const myquestions: Question[] = [
       "Accept it openly and use it to improve.",
       "Analyze it critically and take what's relevant.",
       "Focus more on positive feedback and dismiss negative.",
-      "Take it personally and get discouraged."
+      "Take it personally and get discouraged.",
     ],
-    question: "How do you handle feedback, both positive and negative?"
+    question: "How do you handle feedback, both positive and negative?",
   },
   {
     isImage: true,
@@ -76,9 +79,9 @@ const myquestions: Question[] = [
       "Schedule regular meetings and updates.",
       "Use messaging apps and collaboration tools.",
       "Make sure everyone is aware of their roles and responsibilities.",
-      "Allow communication to happen naturally without too many rules."
+      "Allow communication to happen naturally without too many rules.",
     ],
-    question: "How do you ensure effective communication within the team?"
+    question: "How do you ensure effective communication within the team?",
   },
   {
     isImage: false,
@@ -86,20 +89,25 @@ const myquestions: Question[] = [
       "Stay calm and come up with a new plan.",
       "Consult with the team to find the best solution.",
       "Stick to the original plan and hope for the best.",
-      "Panic and look for immediate solutions regardless of long-term effects."
+      "Panic and look for immediate solutions regardless of long-term effects.",
     ],
-    question: "How do you deal with unexpected challenges or changes in plans?"
-  }
+    question: "How do you deal with unexpected challenges or changes in plans?",
+  },
 ];
 
 const Survey = () => {
 
   const { questions, jobTitle } = useQuestionsContext();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<(string | null)[]>(Array(questions.length).fill(null));
+  const [answers, setAnswers] = useState<(string | null)[]>(
+    Array(questions.length).fill(null)
+  );
   const [loading, setLoading] = useState(false);
+
   const [response, setResponse] = useState<{ description: string, title: string } | null>(null);
   // const jobTitle = "Manager for a Student organization";
+  const [isCompleted, setIsCompleted] = useState(false);
+
 
   const handleAnswer = (answer: string) => {
     const newAnswers = [...answers];
@@ -109,6 +117,10 @@ const Survey = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
+
+    if(currentQuestionIndex === questions.length - 1) {
+      setIsCompleted(true);
+    }
   };
 
   const handleSubmit = async () => {
@@ -117,8 +129,8 @@ const Survey = () => {
       jobTitle,
       questions: questions.map((question, questionIndex) => ({
         ...question,
-        answer: answers[questionIndex] || ""
-      }))
+        answer: answers[questionIndex] || "",
+      })),
     };
     console.log(submissionData);
     try {
@@ -141,46 +153,76 @@ const Survey = () => {
 
   return (
     <main className="bg-[#141416] h-screen w-screen overflow-auto flex flex-col main-scrollbar-hide">
-        <Navber />
-      <div className="grid grid-cols-8 gap-4 my-6 mx-4 sm:mx-6 md:mx-8 lg:mx-12 flex-grow">
-        <div id="left-div" className="col-span-2 p-6 bg-gray-800 rounded-xl shadow-xl overflow-scroll main-scrollbar-hide">
+      <Navber />
+      <div className="grid md:grid-cols-8 gap-4 my-6 mx-4 sm:mx-6 md:mx-8 lg:mx-12 flex-grow overflow-auto">
+        <div
+          id="left-div"
+          className="hidden md:block md:col-span-2 p-6 bg-gray-800 rounded-xl shadow-xl overflow-scroll main-scrollbar-hide"
+        >
           {questions.map((question, index) => (
             <div
               key={index}
               className={`p-4 mb-2 rounded-lg cursor-pointer text-white ${
-                currentQuestionIndex === index ? 'bg-blue-900' : answers[index] !== null ? 'bg-slate-500 ai-button' : 'bg-gray-500 opacity-50'
+                currentQuestionIndex === index
+                  ? "bg-[#180721]"
+                  : answers[index] !== null
+                  ? "bg-slate-500 ai-button"
+                  : "bg-gray-500 opacity-50"
               }`}
-              onClick={() => answers[index] !== null && setCurrentQuestionIndex(index)}
-              style={{ pointerEvents: answers[index] === null ? 'none' : 'auto' }}
+              onClick={() =>
+                answers[index] !== null && setCurrentQuestionIndex(index)
+              }
+              style={{
+                pointerEvents: answers[index] === null ? "none" : "auto",
+              }}
             >
               {index + 1}. {question.question}
             </div>
           ))}
         </div>
-        <div id="right-div" className="col-span-6 p-6 bg-gray-800 rounded-xl shadow-xl overflow-scroll main-scrollbar-hide">
-        <div className='text-white'>{currentQuestionIndex + 1} of {questions.length}</div>
-        
-          <div className="mb-4 text-white text-2xl text-center mt-10">{questions[currentQuestionIndex].question}</div>
-          <div className="grid grid-cols-2 gap-2 px-20">
-            {questions[currentQuestionIndex].options.map((option, index) => (
-              <button
-                key={index}
-                className={`p-4 py-20 text-lg rounded-lg border-[1px] border-gray-200 ${
-                  answers[currentQuestionIndex] === option ? 'bg-red-900 text-white' : 'ai-button text-white'
-                }`}
-                onClick={() => handleAnswer(option)}
-              >
-                {option}
-              </button>
-            ))}
+        <div
+          id="right-div"
+          className="md:col-span-6 p-6 bg-gray-800 rounded-xl shadow-xl overflow-scroll main-scrollbar-hide flex flex-col items-center"
+        >
+          <div className="text-white">
+            {currentQuestionIndex + 1} of {questions.length}
           </div>
-          {currentQuestionIndex === questions.length - 1 && (
+
+          <div className="flex-grow flex flex-col justify-center items-center">
+            <div className="mb-4 text-white text-2xl text-center">
+              {questions[currentQuestionIndex].question}
+            </div>
+            <div className="grid md:grid-cols-2 gap-4 px-20 my-6">
+              {questions[currentQuestionIndex].options.map((option, index) => (
+                <button
+                  key={index}
+                  className={`p-4 py-auto md:py-16 text-lg rounded-lg border-[1px] border-gray-200 ${
+                    answers[currentQuestionIndex] === option
+                      ? "bg-[#180721] text-white text-bold tracking-wide"
+                      : "bg-response-gradient hover:bg-selected-response-gradient text-white"
+                  }`}
+                  onClick={() => handleAnswer(option)}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {isCompleted && (
             <button
-              className="mt-4 p-4 bg-green-500 text-white rounded-lg"
+              className="mt-4 p-4 hover:bg-submit-gradient text-[#180721] font-bold rounded-lg text-2xl max-w-[800px] w-full bg-gradient-to-r from-blue-200 to-cyan-200"
               onClick={handleSubmit}
               disabled={loading}
             >
-              {loading ? 'Submitting...' : 'Submit'}
+              {loading ? (
+                "Submitting..."
+              ) : (
+                <div className="flex items-center justify-center">
+                  SUBMIT
+                  <SiTestcafe className="ml-2" />
+                </div>
+              )}
             </button>
           )}
         </div>

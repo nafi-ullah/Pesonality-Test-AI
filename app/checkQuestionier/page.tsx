@@ -1,14 +1,14 @@
 import Navber from "@/components/Navbar";
 import Link from "next/link";
 
-const CreateQuestionier = () => {
+const page = () => {
   return (
     <main className="bg-[#141416] h-screen w-screen overflow-auto flex flex-col main-scrollbar-hide">
       <Navber />
       <div className="my-6 mx-4 sm:mx-6 md:mx-8 lg:mx-12 p-6 dashboard-bg rounded-xl shadow-xl flex-grow flex flex-col overflow-scroll main-scrollbar-hide">
         <div className="flex-grow mt-6 px-4 flex flex-col justify-center items-center text-white text-xl">
           <h1 className="text-left text-white text-3xl font-bold tracking-wide mb-8">
-            CREATE QUESTIONIER
+            CHECK QUESTIONIER
           </h1>
           <h1>Job Title</h1>
           <input
@@ -26,6 +26,6 @@ const CreateQuestionier = () => {
         </div>
       </div>
     </main>
-  );
-};
-export default CreateQuestionier;
+  )
+}
+export default page
