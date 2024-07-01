@@ -137,7 +137,7 @@ const Survey = () => {
   };
 
   return (
-    <main className="bg-[#F1F2F4] h-screen w-screen overflow-auto flex flex-col main-scrollbar-hide">
+    <main className="bg-[#141416] h-screen w-screen overflow-auto flex flex-col main-scrollbar-hide">
         <Navber />
       <div className="grid grid-cols-8 gap-4 my-6 mx-4 sm:mx-6 md:mx-8 lg:mx-12 flex-grow">
         <div id="left-div" className="col-span-2 p-6 bg-gray-800 rounded-xl shadow-xl overflow-scroll main-scrollbar-hide">
@@ -158,7 +158,7 @@ const Survey = () => {
         <div className='text-white'>{currentQuestionIndex + 1} of {questions.length}</div>
         
           <div className="mb-4 text-white text-2xl text-center mt-10">{questions[currentQuestionIndex].question}</div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2 px-20">
             {questions[currentQuestionIndex].options.map((option, index) => (
               <button
                 key={index}

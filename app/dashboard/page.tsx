@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Dashboard = () => {
   return (
-    <main className="bg-[#F1F2F4] h-screen w-screen overflow-auto flex flex-col main-scrollbar-hide">
+    <main className="bg-[#141416] h-screen w-screen overflow-auto flex flex-col main-scrollbar-hide">
       <Navber />
       <div className="my-6 mx-4 sm:mx-6 md:mx-8 lg:mx-12 p-6 dashboard-bg rounded-xl shadow-xl flex-grow flex flex-col overflow-scroll main-scrollbar-hide">
         <div className="flex justify-between items-center px-6 mt-2">

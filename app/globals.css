@@ -75,17 +75,17 @@
 }
 
 .dashboard-bg {
-  background-color: #000000;
+  background-color: #3c1053;
   background-image: linear-gradient(
     140deg,
-    #000000 0%,
-    #49495e 55%,
-    #000000 100%
+    #ffffff20 0%,
+    #0d3144 55%,
+    #ffffff20 100%
   );
   /* Make the background large enough to allow movement */
   background-size: 200% 200%;
   /* Apply the animation */
-  animation: slide 10s infinite linear;
+  animation: slide 5s infinite alternate-reverse;
 }
 
 /* Define the keyframes for the animation */
