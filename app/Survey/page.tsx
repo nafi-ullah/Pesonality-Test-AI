@@ -158,7 +158,7 @@ const Survey = () => {
         <div className='text-white'>{currentQuestionIndex + 1} of {questions.length}</div>
         
           <div className="mb-4 text-white text-2xl text-center mt-10">{questions[currentQuestionIndex].question}</div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2 px-20">
             {questions[currentQuestionIndex].options.map((option, index) => (
               <button
                 key={index}
