@@ -144,7 +144,7 @@ const Survey = () => {
 
       const data = await res.json();
       setResponse(data);
-      setLoading(false);
+   
     } catch (error) {
       console.error("Error fetching personality data:", error);
       setLoading(false);
@@ -152,7 +152,7 @@ const Survey = () => {
   };
 
   return (
-    <main className="bg-[#141416] h-screen w-screen overflow-auto flex flex-col main-scrollbar-hide">
+    <main className="bg-[#141416] h-screen w-screen overflow-auto flex flex-col ">
       <Navber />
       <div className="grid md:grid-cols-8 gap-4 my-6 mx-4 sm:mx-6 md:mx-8 lg:mx-12 flex-grow overflow-auto">
         <div
@@ -180,10 +180,10 @@ const Survey = () => {
             </div>
           ))}
         </div>
-        <div
-          id="right-div"
-          className="md:col-span-6 p-6 bg-gray-800 rounded-xl shadow-xl overflow-scroll main-scrollbar-hide flex flex-col items-center"
-        >
+        {!response && (
+        <div id="right-div"
+        className="md:col-span-6 p-6 bg-gray-800 rounded-xl shadow-xl overflow-scroll main-scrollbar-hide flex flex-col items-center"
+      >
           <div className="text-white">
             {currentQuestionIndex + 1} of {questions.length}
           </div>
@@ -225,14 +225,22 @@ const Survey = () => {
               )}
             </button>
           )}
-        </div>
-      </div>
-      {response && (
+        </div>)}
+        {response && (
+        <div id="right-div"
+        className="md:col-span-6 p-6 bg-gray-800 rounded-xl shadow-xl overflow-scroll main-scrollbar-hide flex flex-col items-center"
+      >
         <div className="mt-10 w-full max-w-2xl px-5 text-center">
-          <h2 className="text-2xl font-bold">{response.title}</h2>
-          <p className="text-lg mt-4">{response.description}</p>
+          <h2 className="text-2xl font-bold text-white">{response.title}</h2>
+          <p className="text-lg mt-4 text-white">{response.description}</p>
+        </div>
         </div>
       )}
+        
+      </div>
+      
+      
+      
     </main>
   );
 };
