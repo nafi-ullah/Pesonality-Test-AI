@@ -2,6 +2,7 @@ import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { NavRight } from "./NavRight";
 import { IoMenu } from "react-icons/io5";
+import Link from "next/link";
 
 const Navber = () => {
   return (
@@ -9,18 +10,23 @@ const Navber = () => {
       <button className="md:hidden text-slate-200">
         <IoMenu size={42} />
       </button>
-      <Image
-        src="/light_logo.png"
-        width={170}
-        height={20}
-        alt="logo"
-        className="rounded-xl ml-2 mr-[-30px] md:mr-0"
-        priority
-      />
+      <Link href={"/dashboard"}>
+        <Image
+          src="/light_logo.png"
+          width={170}
+          height={20}
+          alt="logo"
+          className="rounded-xl ml-2 mr-[-30px] md:mr-0"
+          priority
+        />
+      </Link>
       <div className="hidden md:flex items-center gap-2">
-        <button className="text-white ai-button px-4 py-2 rounded-xl shadow-xl border-[2px] border-slate-500">
+        <Link
+          href={"/enterCode"}
+          className="text-white ai-button px-4 py-2 rounded-xl shadow-xl border-[2px] border-slate-500"
+        >
           Enter Code
-        </button>
+        </Link>
         <LanguageSwitcher />
         <NavRight />
       </div>
