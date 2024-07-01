@@ -1,6 +1,6 @@
 import { MdDelete } from "react-icons/md";
 
-type PropType = { isSelected: boolean, onClick: () => void};
+type PropType = { isSelected: boolean; onClick: () => void };
 
 export const ResponseTitleCard = (props: PropType) => {
   return (
@@ -10,13 +10,23 @@ export const ResponseTitleCard = (props: PropType) => {
       style={
         props.isSelected
           ? {
-              backgroundImage: "linear-gradient(to right, #41295a,  #2F0743)",
+              background: "#180721",
               scale: "1.03",
             }
           : {}
       }
     >
-      <div className="bg-[#180721] text-[#ffff00] h-8 w-8 rounded-full flex justify-center items-center font-bold text-sm">
+      <div
+        className="bg-[#180721] text-[#ffff00] h-8 w-8 rounded-full flex justify-center items-center font-bold text-sm"
+        style={
+          props.isSelected
+            ? {
+                background: "#ffffff",
+                color: "#410d19",
+              }
+            : {}
+        }
+      >
         1
       </div>
       <div className="flex-grow px-4 my-2">
@@ -24,7 +34,7 @@ export const ResponseTitleCard = (props: PropType) => {
           Mehraj
         </h2>
       </div>
-      <button
+      <div
         className="hover:scale-125 h-8 w-8 rounded-full shadow-2xl shadow-white flex justify-center items-center font-bold text-xl"
         style={
           props.isSelected
@@ -40,7 +50,7 @@ export const ResponseTitleCard = (props: PropType) => {
         }
       >
         <MdDelete size={props.isSelected ? 20 : 16} />
-      </button>
+      </div>
     </button>
   );
 };

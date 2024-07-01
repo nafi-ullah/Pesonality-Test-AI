@@ -26,7 +26,7 @@ const InstructionDiv: React.FC<InstructionDivProps> = ({ heading, subhead, image
 
 const QuestionsPage: React.FC = () => {
   return (
-    <div className="w-screen">
+    <div className="w-screen bg-[#141416]">
       <Navbar />
       <div className="w-screen">
       <div className="relative">

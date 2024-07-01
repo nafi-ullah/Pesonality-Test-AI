@@ -85,7 +85,7 @@
   /* Make the background large enough to allow movement */
   background-size: 200% 200%;
   /* Apply the animation */
-  animation: slide 10s infinite linear;
+  animation: slide 5s infinite alternate-reverse;
 }
 
 /* Define the keyframes for the animation */
