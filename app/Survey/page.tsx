@@ -155,6 +155,8 @@ const Survey = () => {
           ))}
         </div>
         <div id="right-div" className="col-span-6 p-6 bg-gray-800 rounded-xl shadow-xl overflow-scroll main-scrollbar-hide">
+        <div className='text-white'>{currentQuestionIndex + 1} of {questions.length}</div>
+        
           <div className="mb-4 text-white text-2xl text-center mt-10">{questions[currentQuestionIndex].question}</div>
           <div className="grid grid-cols-2 gap-2">
             {questions[currentQuestionIndex].options.map((option, index) => (
