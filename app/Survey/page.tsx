@@ -1,6 +1,7 @@
 "use client";
 import Navber from '@/components/Navbar';
 import { useState } from 'react';
+import { useQuestionsContext } from '../context/QuestionsContext';
 
 interface Question {
   isImage: boolean;
@@ -8,7 +9,7 @@ interface Question {
   question: string;
 }
 
-const questions: Question[] = [
+const myquestions: Question[] = [
   {
     isImage: false,
     options: [
@@ -92,11 +93,13 @@ const questions: Question[] = [
 ];
 
 const Survey = () => {
+
+  const { questions, jobTitle } = useQuestionsContext();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<(string | null)[]>(Array(questions.length).fill(null));
   const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState(null);
-  const jobTitle = "Manager for a Student organization";
+  const [response, setResponse] = useState<{ description: string, title: string } | null>(null);
+  // const jobTitle = "Manager for a Student organization";
 
   const handleAnswer = (answer: string) => {
     const newAnswers = [...answers];
@@ -182,7 +185,12 @@ const Survey = () => {
           )}
         </div>
       </div>
-      {response && <div className="p-4 bg-white text-black mt-4 rounded-lg">{JSON.stringify(response, null, 2)}</div>}
+      {response && (
+        <div className="mt-10 w-full max-w-2xl px-5 text-center">
+          <h2 className="text-2xl font-bold">{response.title}</h2>
+          <p className="text-lg mt-4">{response.description}</p>
+        </div>
+      )}
     </main>
   );
 };
